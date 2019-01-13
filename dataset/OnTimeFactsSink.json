@@ -1,0 +1,15 @@
+{
+	"name": "OnTimeFactsSink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"fileName": "",
+			"folderPath": "ontimedata/OnTimeFacts"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

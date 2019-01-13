@@ -1,0 +1,24 @@
+{
+	"name": "L_UNIQUE_CARRIERS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BTS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "HttpFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"relativeUrl": "/Download_Lookup.asp?Lookup=L_UNIQUE_CARRIERS",
+			"requestMethod": "Get"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

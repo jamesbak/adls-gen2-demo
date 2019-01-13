@@ -1,0 +1,24 @@
+{
+	"name": "L_UNIQUE_CARRIERS_SINK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "",
+			"folderPath": "ontimedata/dimensions/unique_carriers"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

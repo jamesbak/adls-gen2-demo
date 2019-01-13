@@ -1,0 +1,19 @@
+{
+	"name": "OnTimeFacts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BTS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "HttpFile",
+		"typeProperties": {
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Optimal"
+			},
+			"relativeUrl": "PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2018_1.zip",
+			"requestMethod": "Get"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

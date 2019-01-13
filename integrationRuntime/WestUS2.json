@@ -1,0 +1,11 @@
+{
+	"name": "WestUS2",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "West US 2"
+			}
+		}
+	}
+}

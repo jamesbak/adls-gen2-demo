@@ -1,0 +1,10 @@
+{
+	"name": "ADLSGen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://adlsgen2demo2.dfs.core.windows.net"
+		}
+	}
+}
