@@ -156,13 +156,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "L_CITY_MARKET_ID",
+						"referenceName": "L_CITY_MARKET",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "L_CITY_MARKET_ID_SINK",
+						"referenceName": "L_CITY_MARKET_SINK",
 						"type": "DatasetReference"
 					}
 				]
