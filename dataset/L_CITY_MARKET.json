@@ -1,5 +1,5 @@
 {
-	"name": "L_CITY_MARKET_ID",
+	"name": "L_CITY_MARKET",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "BTS",

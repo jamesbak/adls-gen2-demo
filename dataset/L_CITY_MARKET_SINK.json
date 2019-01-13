@@ -1,5 +1,5 @@
 {
-	"name": "L_CITY_MARKET_ID_SINK",
+	"name": "L_CITY_MARKET_SINK",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ADLSGen2",
