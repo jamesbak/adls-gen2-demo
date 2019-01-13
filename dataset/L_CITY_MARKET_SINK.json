@@ -1,0 +1,23 @@
+{
+	"name": "L_CITY_MARKET_ID_SINK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"folderPath": "dimensions/city_markets"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

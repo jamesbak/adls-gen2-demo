@@ -1,0 +1,32 @@
+{
+	"name": "L_CITY_MARKET_ID",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BTS",
+			"type": "LinkedServiceReference"
+		},
+		"type": "HttpFile",
+		"structure": [
+			{
+				"name": "Code"
+			},
+			{
+				"name": "Description"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"relativeUrl": "/Download_Lookup.asp?Lookup=L_CITY_MARKET_ID",
+			"requestMethod": "Get"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
