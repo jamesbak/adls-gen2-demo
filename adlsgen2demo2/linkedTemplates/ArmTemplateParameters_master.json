@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adlsgen2demo2"
+		},
+		"integrationRuntime_WestUS2": {
+			"value": "WestUS2"
+		},
+		"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
+			"value": "dimensions/airports"
+		},
+		"L_CITY_MARKET_SINK_properties_typeProperties_folderPath": {
+			"value": "dimensions/city_markets"
+		},
+		"L_MONTHS_SINK_properties_typeProperties_folderPath": {
+			"value": "dimensions/months"
+		},
+		"L_STATE_ABR_AVIATION_SINK_properties_typeProperties_folderPath": {
+			"value": "dimensions/states"
+		},
+		"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_folderPath": {
+			"value": "ontimedata/dimensions/unique_carriers"
+		},
+		"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
+			"value": "dimensions/world_area_codes"
+		},
+		"OnTimeFactsSink_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"OnTimeFactsSink_properties_typeProperties_folderPath": {
+			"value": "ontimedata/OnTimeFacts"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"value": "https://adlsgen2demo2.dfs.core.windows.net"
+		},
+		"BTS_properties_typeProperties_url": {
+			"value": "https://transtats.bts.gov/"
+		}
+	}
+}

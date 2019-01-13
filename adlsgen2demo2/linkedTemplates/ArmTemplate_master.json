@@ -1,0 +1,127 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "adlsgen2demo2"
+		},
+		"integrationRuntime_WestUS2": {
+			"type": "string",
+			"metadata": "Integration Runtime Name",
+			"defaultValue": "WestUS2"
+		},
+		"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "dimensions/airports"
+		},
+		"L_CITY_MARKET_SINK_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "dimensions/city_markets"
+		},
+		"L_MONTHS_SINK_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "dimensions/months"
+		},
+		"L_STATE_ABR_AVIATION_SINK_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "dimensions/states"
+		},
+		"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/dimensions/unique_carriers"
+		},
+		"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "dimensions/world_area_codes"
+		},
+		"OnTimeFactsSink_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"OnTimeFactsSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/OnTimeFacts"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2demo2.dfs.core.windows.net"
+		},
+		"BTS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://transtats.bts.gov/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"integrationRuntime_WestUS2": {
+						"value": "[parameters('integrationRuntime_WestUS2')]"
+					},
+					"ADLSGen2_properties_typeProperties_url": {
+						"value": "[parameters('ADLSGen2_properties_typeProperties_url')]"
+					},
+					"BTS_properties_typeProperties_url": {
+						"value": "[parameters('BTS_properties_typeProperties_url')]"
+					},
+					"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
+						"value": "[parameters('L_AIRPORT_ID_SINK_properties_typeProperties_folderPath')]"
+					},
+					"L_CITY_MARKET_SINK_properties_typeProperties_folderPath": {
+						"value": "[parameters('L_CITY_MARKET_SINK_properties_typeProperties_folderPath')]"
+					},
+					"L_MONTHS_SINK_properties_typeProperties_folderPath": {
+						"value": "[parameters('L_MONTHS_SINK_properties_typeProperties_folderPath')]"
+					},
+					"L_STATE_ABR_AVIATION_SINK_properties_typeProperties_folderPath": {
+						"value": "[parameters('L_STATE_ABR_AVIATION_SINK_properties_typeProperties_folderPath')]"
+					},
+					"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_fileName": {
+						"value": "[parameters('L_UNIQUE_CARRIERS_SINK_properties_typeProperties_fileName')]"
+					},
+					"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_folderPath": {
+						"value": "[parameters('L_UNIQUE_CARRIERS_SINK_properties_typeProperties_folderPath')]"
+					},
+					"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
+						"value": "[parameters('L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath')]"
+					},
+					"OnTimeFactsSink_properties_typeProperties_fileName": {
+						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]"
+					},
+					"OnTimeFactsSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
