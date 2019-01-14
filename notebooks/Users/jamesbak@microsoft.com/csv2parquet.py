@@ -11,6 +11,8 @@ dbutils.fs.mount(
   mount_point = "/mnt/ontimedata",
   extra_configs = configs)
 
+
+
 # COMMAND ----------
 
 basePath = "/mnt/ontimedata/"
@@ -19,13 +21,18 @@ df = spark.read.format('csv').options(header='true', inferschema='true').load(ba
 
 # COMMAND ----------
 
-df.write.mode("append").parquet(basePath + "parquet/OnTimeFacts")
+#df.write.mode("append").parquet(basePath + "parquet/OnTimeFacts")
+df.write.saveAsTable('OnTimeFacts',
+    format='parquet',
+    mode='overwrite',
+    path=basePath + 'parquet/OnTimeFacts')
 
 # COMMAND ----------
 
 for dimension in dbutils.fs.ls(basePath + "csv/dimensions"):
   df = spark.read.format('csv').options(header='true', inferschema='true').load(dimension.path)
-  df.write.mode("append").parquet(basePath + "parquet/dimensions/" + dimension.name)
+  df.write.saveAsTable('Dim_' + dimension.name.strip('/'), format='parquet', mode='overwrite', path=basePath + 'parquet/dimensions/' + dimension.name)
+
 
 # COMMAND ----------
 
