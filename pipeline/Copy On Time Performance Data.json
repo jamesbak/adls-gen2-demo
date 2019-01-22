@@ -261,7 +261,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "L_UNIQUE_CARRIERS_SINK",
+						"referenceName": "MetarSink",
 						"type": "DatasetReference"
 					}
 				]
