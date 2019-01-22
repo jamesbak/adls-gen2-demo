@@ -1,0 +1,13 @@
+{
+	"name": "Metar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DemoBlobData",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"folderPath": "metar"
+		}
+	}
+}
