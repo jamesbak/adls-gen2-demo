@@ -1,0 +1,14 @@
+{
+	"name": "Aircraft",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DemoBlobData",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"fileName": "",
+			"folderPath": "demo-data/aircraft"
+		}
+	}
+}
