@@ -12,21 +12,25 @@
 			"metadata": "Integration Runtime Name",
 			"defaultValue": "WestUS2"
 		},
+		"DemoBlobData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DemoBlobData'"
+		},
 		"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "dimensions/airports"
+			"defaultValue": "ontimedata/csv/dimensions/airports"
 		},
 		"L_CITY_MARKET_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "dimensions/city_markets"
+			"defaultValue": "ontimedata/csv/dimensions/city_markets"
 		},
 		"L_MONTHS_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "dimensions/months"
+			"defaultValue": "ontimedata/csv/dimensions/months"
 		},
 		"L_STATE_ABR_AVIATION_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "dimensions/states"
+			"defaultValue": "ontimedata/csv/dimensions/states"
 		},
 		"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_fileName": {
 			"type": "string",
@@ -34,11 +38,23 @@
 		},
 		"L_UNIQUE_CARRIERS_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "ontimedata/dimensions/unique_carriers"
+			"defaultValue": "ontimedata/csv/dimensions/unique_carriers"
 		},
 		"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "dimensions/world_area_codes"
+			"defaultValue": "ontimedata/csv/dimensions/world_area_codes"
+		},
+		"Metar_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"Metar_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "demo-data/metar"
+		},
+		"MetarSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/csv/metar"
 		},
 		"OnTimeFactsSink_properties_typeProperties_fileName": {
 			"type": "string",
@@ -46,7 +62,7 @@
 		},
 		"OnTimeFactsSink_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "ontimedata/OnTimeFacts"
+			"defaultValue": "ontimedata/csv/OnTimeFacts"
 		},
 		"ADLSGen2_properties_typeProperties_url": {
 			"type": "string",
@@ -86,6 +102,9 @@
 					"integrationRuntime_WestUS2": {
 						"value": "[parameters('integrationRuntime_WestUS2')]"
 					},
+					"DemoBlobData_connectionString": {
+						"value": "[parameters('DemoBlobData_connectionString')]"
+					},
 					"ADLSGen2_properties_typeProperties_url": {
 						"value": "[parameters('ADLSGen2_properties_typeProperties_url')]"
 					},
@@ -113,6 +132,15 @@
 					"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
 						"value": "[parameters('L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath')]"
 					},
+					"Metar_properties_typeProperties_fileName": {
+						"value": "[parameters('Metar_properties_typeProperties_fileName')]"
+					},
+					"Metar_properties_typeProperties_folderPath": {
+						"value": "[parameters('Metar_properties_typeProperties_folderPath')]"
+					},
+					"MetarSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('MetarSink_properties_typeProperties_folderPath')]"
+					},
 					"OnTimeFactsSink_properties_typeProperties_fileName": {
 						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]"
 					},
@@ -122,6 +150,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
 		}
 	]
 }
