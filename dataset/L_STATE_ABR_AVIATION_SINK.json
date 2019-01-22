@@ -16,7 +16,7 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": true
 			},
-			"folderPath": "dimensions/states"
+			"folderPath": "ontimedata/csv/dimensions/states"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

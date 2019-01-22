@@ -16,7 +16,7 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": true
 			},
-			"folderPath": "dimensions/city_markets"
+			"folderPath": "ontimedata/csv/dimensions/city_markets"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

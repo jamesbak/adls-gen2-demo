@@ -8,7 +8,7 @@
 		"type": "AzureBlobFSFile",
 		"typeProperties": {
 			"fileName": "",
-			"folderPath": "ontimedata/OnTimeFacts"
+			"folderPath": "ontimedata/csv/OnTimeFacts"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

@@ -16,7 +16,7 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": true
 			},
-			"folderPath": "dimensions/months"
+			"folderPath": "ontimedata/csv/dimensions/months"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

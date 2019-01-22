@@ -17,7 +17,7 @@
 				"firstRowAsHeader": true
 			},
 			"fileName": "",
-			"folderPath": "ontimedata/dimensions/unique_carriers"
+			"folderPath": "ontimedata/csv/dimensions/unique_carriers"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

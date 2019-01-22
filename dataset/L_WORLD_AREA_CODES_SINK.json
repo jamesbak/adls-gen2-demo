@@ -16,7 +16,7 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": true
 			},
-			"folderPath": "dimensions/world_area_codes"
+			"folderPath": "ontimedata/csv/dimensions/world_area_codes"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

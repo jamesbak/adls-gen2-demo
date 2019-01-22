@@ -16,7 +16,7 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": true
 			},
-			"folderPath": "dimensions/airports"
+			"folderPath": "ontimedata/csv/dimensions/airports"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
