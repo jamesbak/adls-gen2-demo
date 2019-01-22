@@ -24,6 +24,18 @@
 			"type": "string",
 			"defaultValue": "https://transtats.bts.gov/"
 		},
+		"Aircraft_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"Aircraft_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "demo-data/aircraft"
+		},
+		"AircraftSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/csv/aircraft"
+		},
 		"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "ontimedata/csv/dimensions/airports"
@@ -63,14 +75,6 @@
 		"MetarSink_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "ontimedata/csv/metar"
-		},
-		"OnTimeFactsSink_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": ""
-		},
-		"OnTimeFactsSink_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "ontimedata/csv/OnTimeFacts"
 		}
 	},
 	"variables": {
@@ -131,6 +135,45 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Aircraft')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DemoBlobData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlob",
+				"typeProperties": {
+					"fileName": "[parameters('Aircraft_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('Aircraft_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DemoBlobData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AircraftSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"folderPath": "[parameters('AircraftSink_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/L_AIRPORT_ID')]",
@@ -548,50 +591,6 @@
 				"type": "AzureBlobFSFile",
 				"typeProperties": {
 					"folderPath": "[parameters('MetarSink_properties_typeProperties_folderPath')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnTimeFacts')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BTS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "HttpFile",
-				"typeProperties": {
-					"compression": {
-						"type": "ZipDeflate",
-						"level": "Optimal"
-					},
-					"relativeUrl": "PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2018_1.zip",
-					"requestMethod": "Get"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/BTS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnTimeFactsSink')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureBlobFSFile",
-				"typeProperties": {
-					"fileName": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
 				}
 			},
 			"dependsOn": [

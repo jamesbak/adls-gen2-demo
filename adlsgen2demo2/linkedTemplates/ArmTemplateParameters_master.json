@@ -11,6 +11,15 @@
 		"DemoBlobData_connectionString": {
 			"value": ""
 		},
+		"Aircraft_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"Aircraft_properties_typeProperties_folderPath": {
+			"value": "demo-data/aircraft"
+		},
+		"AircraftSink_properties_typeProperties_folderPath": {
+			"value": "ontimedata/csv/aircraft"
+		},
 		"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
 			"value": "ontimedata/csv/dimensions/airports"
 		},

@@ -6,60 +6,12 @@
 			"type": "string",
 			"metadata": "Data Factory Name",
 			"defaultValue": "adlsgen2demo2"
-		},
-		"OnTimeFactsSink_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": ""
-		},
-		"OnTimeFactsSink_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "ontimedata/csv/OnTimeFacts"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/OnTimeFacts')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "BTS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "HttpFile",
-				"typeProperties": {
-					"compression": {
-						"type": "ZipDeflate",
-						"level": "Optimal"
-					},
-					"relativeUrl": "PREZIP/On_Time_Reporting_Carrier_On_Time_Performance_1987_present_2018_1.zip",
-					"requestMethod": "Get"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnTimeFactsSink')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureBlobFSFile",
-				"typeProperties": {
-					"fileName": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Copy On Time Performance Data')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -69,7 +21,6 @@
 					{
 						"name": "Copy Dim Unique Codes",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -77,7 +28,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -91,22 +41,19 @@
 						"inputs": [
 							{
 								"referenceName": "L_UNIQUE_CARRIERS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "L_UNIQUE_CARRIERS_SINK",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Flight Facts",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -114,7 +61,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -128,22 +74,19 @@
 						"inputs": [
 							{
 								"referenceName": "OnTimeFacts",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "OnTimeFactsSink",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Dim Months",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -151,7 +94,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -165,22 +107,19 @@
 						"inputs": [
 							{
 								"referenceName": "L_MONTHS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "L_MONTHS_SINK",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Dim Airports",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -188,7 +127,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -202,22 +140,19 @@
 						"inputs": [
 							{
 								"referenceName": "L_AIRPORT_ID",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "L_AIRPORT_ID_SINK",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Dim City Markets",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -225,7 +160,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -239,22 +173,19 @@
 						"inputs": [
 							{
 								"referenceName": "L_CITY_MARKET",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "L_CITY_MARKET_SINK",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Dim States",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -262,7 +193,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -276,22 +206,19 @@
 						"inputs": [
 							{
 								"referenceName": "L_STATE_ABR_AVIATION",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "L_STATE_ABR_AVIATION_SINK",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Dim World Area Codes",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -299,7 +226,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "HttpSource",
@@ -313,22 +239,19 @@
 						"inputs": [
 							{
 								"referenceName": "L_WORLD_AREA_CODES",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "L_WORLD_AREA_CODES_SINK",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Metar Data",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -336,7 +259,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "BlobSource",
@@ -350,22 +272,19 @@
 						"inputs": [
 							{
 								"referenceName": "Metar",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "MetarSink",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
 					{
 						"name": "Copy Aircraft Data",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -373,7 +292,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "BlobSource",
@@ -387,25 +305,53 @@
 						"inputs": [
 							{
 								"referenceName": "Aircraft",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AircraftSink",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
-				],
-				"annotations": []
+				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/OnTimeFacts')]",
-				"[concat(variables('factoryId'), '/datasets/OnTimeFactsSink')]"
+				"[concat(variables('factoryId'), '/datasets/Aircraft')]",
+				"[concat(variables('factoryId'), '/datasets/AircraftSink')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Aircraft')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DemoBlobData",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureBlob",
+				"typeProperties": {
+					"fileName": "",
+					"folderPath": "demo-data/aircraft"
+				}
+			}
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AircraftSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"folderPath": "ontimedata/csv/aircraft"
+				}
+			}
 		}
 	]
 }

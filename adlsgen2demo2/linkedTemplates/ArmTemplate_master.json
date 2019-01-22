@@ -16,6 +16,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DemoBlobData'"
 		},
+		"Aircraft_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"Aircraft_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "demo-data/aircraft"
+		},
+		"AircraftSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/csv/aircraft"
+		},
 		"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "ontimedata/csv/dimensions/airports"
@@ -111,6 +123,15 @@
 					"BTS_properties_typeProperties_url": {
 						"value": "[parameters('BTS_properties_typeProperties_url')]"
 					},
+					"Aircraft_properties_typeProperties_fileName": {
+						"value": "[parameters('Aircraft_properties_typeProperties_fileName')]"
+					},
+					"Aircraft_properties_typeProperties_folderPath": {
+						"value": "[parameters('Aircraft_properties_typeProperties_folderPath')]"
+					},
+					"AircraftSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('AircraftSink_properties_typeProperties_folderPath')]"
+					},
 					"L_AIRPORT_ID_SINK_properties_typeProperties_folderPath": {
 						"value": "[parameters('L_AIRPORT_ID_SINK_properties_typeProperties_folderPath')]"
 					},
@@ -140,12 +161,6 @@
 					},
 					"MetarSink_properties_typeProperties_folderPath": {
 						"value": "[parameters('MetarSink_properties_typeProperties_folderPath')]"
-					},
-					"OnTimeFactsSink_properties_typeProperties_fileName": {
-						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]"
-					},
-					"OnTimeFactsSink_properties_typeProperties_folderPath": {
-						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
 					}
 				}
 			},
@@ -164,6 +179,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"OnTimeFactsSink_properties_typeProperties_fileName": {
+						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]"
+					},
+					"OnTimeFactsSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
 					}
 				}
 			},
