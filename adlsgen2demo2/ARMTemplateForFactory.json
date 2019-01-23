@@ -56,6 +56,18 @@
 			"type": "string",
 			"defaultValue": "ontimedata/csv/dimensions/world_area_codes"
 		},
+		"Manufacturers_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"Manufacturers_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "demo-data/manufacturers"
+		},
+		"ManufacturersSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/csv/manufacturers"
+		},
 		"Metar_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": ""
@@ -427,6 +439,43 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Aircraft Manufacturers",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BlobSource",
+								"recursive": true
+							},
+							"sink": {
+								"type": "AzureBlobFSSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Manufacturers",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ManufacturersSink",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": []
@@ -449,7 +498,9 @@
 				"[concat(variables('factoryId'), '/datasets/Metar')]",
 				"[concat(variables('factoryId'), '/datasets/MetarSink')]",
 				"[concat(variables('factoryId'), '/datasets/Aircraft')]",
-				"[concat(variables('factoryId'), '/datasets/AircraftSink')]"
+				"[concat(variables('factoryId'), '/datasets/AircraftSink')]",
+				"[concat(variables('factoryId'), '/datasets/Manufacturers')]",
+				"[concat(variables('factoryId'), '/datasets/ManufacturersSink')]"
 			]
 		},
 		{
@@ -868,6 +919,45 @@
 						"firstRowAsHeader": true
 					},
 					"folderPath": "[parameters('L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Manufacturers')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DemoBlobData",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlob",
+				"typeProperties": {
+					"fileName": "[parameters('Manufacturers_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('Manufacturers_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DemoBlobData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ManufacturersSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"folderPath": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
 				}
 			},
 			"dependsOn": [

@@ -41,6 +41,15 @@
 		"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
 			"value": "ontimedata/csv/dimensions/world_area_codes"
 		},
+		"Manufacturers_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"Manufacturers_properties_typeProperties_folderPath": {
+			"value": "demo-data/manufacturers"
+		},
+		"ManufacturersSink_properties_typeProperties_folderPath": {
+			"value": "ontimedata/csv/manufacturers"
+		},
 		"Metar_properties_typeProperties_fileName": {
 			"value": ""
 		},

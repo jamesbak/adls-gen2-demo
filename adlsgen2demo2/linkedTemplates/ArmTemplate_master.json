@@ -56,6 +56,18 @@
 			"type": "string",
 			"defaultValue": "ontimedata/csv/dimensions/world_area_codes"
 		},
+		"Manufacturers_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"Manufacturers_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "demo-data/manufacturers"
+		},
+		"ManufacturersSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/csv/manufacturers"
+		},
 		"Metar_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": ""
@@ -153,14 +165,14 @@
 					"L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath": {
 						"value": "[parameters('L_WORLD_AREA_CODES_SINK_properties_typeProperties_folderPath')]"
 					},
-					"Metar_properties_typeProperties_fileName": {
-						"value": "[parameters('Metar_properties_typeProperties_fileName')]"
+					"Manufacturers_properties_typeProperties_fileName": {
+						"value": "[parameters('Manufacturers_properties_typeProperties_fileName')]"
 					},
-					"Metar_properties_typeProperties_folderPath": {
-						"value": "[parameters('Metar_properties_typeProperties_folderPath')]"
+					"Manufacturers_properties_typeProperties_folderPath": {
+						"value": "[parameters('Manufacturers_properties_typeProperties_folderPath')]"
 					},
-					"MetarSink_properties_typeProperties_folderPath": {
-						"value": "[parameters('MetarSink_properties_typeProperties_folderPath')]"
+					"ManufacturersSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
 					}
 				}
 			},
@@ -179,6 +191,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Metar_properties_typeProperties_fileName": {
+						"value": "[parameters('Metar_properties_typeProperties_fileName')]"
+					},
+					"Metar_properties_typeProperties_folderPath": {
+						"value": "[parameters('Metar_properties_typeProperties_folderPath')]"
+					},
+					"MetarSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('MetarSink_properties_typeProperties_folderPath')]"
 					},
 					"OnTimeFactsSink_properties_typeProperties_fileName": {
 						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]"

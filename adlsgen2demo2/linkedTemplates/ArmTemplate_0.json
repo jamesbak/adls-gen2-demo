@@ -64,17 +64,17 @@
 			"type": "string",
 			"defaultValue": "ontimedata/csv/dimensions/world_area_codes"
 		},
-		"Metar_properties_typeProperties_fileName": {
+		"Manufacturers_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": ""
 		},
-		"Metar_properties_typeProperties_folderPath": {
+		"Manufacturers_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "demo-data/metar"
+			"defaultValue": "demo-data/manufacturers"
 		},
-		"MetarSink_properties_typeProperties_folderPath": {
+		"ManufacturersSink_properties_typeProperties_folderPath": {
 			"type": "string",
-			"defaultValue": "ontimedata/csv/metar"
+			"defaultValue": "ontimedata/csv/manufacturers"
 		}
 	},
 	"variables": {
@@ -559,7 +559,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Metar')]",
+			"name": "[concat(parameters('factoryName'), '/Manufacturers')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -570,8 +570,8 @@
 				"annotations": [],
 				"type": "AzureBlob",
 				"typeProperties": {
-					"fileName": "[parameters('Metar_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('Metar_properties_typeProperties_folderPath')]"
+					"fileName": "[parameters('Manufacturers_properties_typeProperties_fileName')]",
+					"folderPath": "[parameters('Manufacturers_properties_typeProperties_folderPath')]"
 				}
 			},
 			"dependsOn": [
@@ -579,7 +579,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/MetarSink')]",
+			"name": "[concat(parameters('factoryName'), '/ManufacturersSink')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -590,7 +590,7 @@
 				"annotations": [],
 				"type": "AzureBlobFSFile",
 				"typeProperties": {
-					"folderPath": "[parameters('MetarSink_properties_typeProperties_folderPath')]"
+					"folderPath": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
 				}
 			},
 			"dependsOn": [
