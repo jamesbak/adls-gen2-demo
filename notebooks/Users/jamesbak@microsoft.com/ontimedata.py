@@ -16,22 +16,15 @@ dbutils.fs.mount(
 
 # COMMAND ----------
 
-for tableName in ["OnTimeFacts", "metar", "aircraft"]:
+for tableName in ["OnTimeFacts", "metar", "aircraft", "manufacturers"]:
   df = spark.read.format('csv').options(header='true', inferschema='true').load(basePath + "csv/" + tableName)
-  df.toDF(*[col.strip() for col in df.columns]).write.saveAsTable(tableName,
+  df.toDF(*[col.strip().replace(' ','_').replace('-','_').replace('(','_').replace(')','_') for col in df.columns]).write.saveAsTable(tableName,
       format='parquet',
       mode='overwrite',
       path=baseAbfsPath + 'parquet/' + tableName)
 
 # COMMAND ----------
 
-df.toDF(*[col.strip() for col in df.columns])
-
-
-# COMMAND ----------
-
-basePath = "/mnt/ontimedata/"
-baseAbfsPath="abfss://ontimedata@adlsgen2demo2.dfs.core.windows.net/"
 for dimension in dbutils.fs.ls(basePath + "csv/dimensions"):
   df = spark.read.format('csv').options(header='true', inferschema='true').load(dimension.path)
   df.write.saveAsTable('Dim_' + dimension.name.strip('/'), format='parquet', mode='overwrite', path=baseAbfsPath + 'parquet/dimensions/' + dimension.name)
@@ -40,11 +33,11 @@ for dimension in dbutils.fs.ls(basePath + "csv/dimensions"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC 
-# MAGIC create table deltatest
-# MAGIC (code string, description string)
-# MAGIC using delta
-# MAGIC location "abfss://ontimedata@adlsgen2demo2.dfs.core.windows.net/parquet/dimensions/airports"
+# MAGIC select *
+# MAGIC from ontimefacts o inner join aircraft a
+# MAGIC     on ltrim("N", o.tail_number) = a.n_number
+# MAGIC   inner join 
+# MAGIC limit 20
 
 # COMMAND ----------
 
