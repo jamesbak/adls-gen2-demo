@@ -16,6 +16,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DemoBlobData'"
 		},
+		"adlspermstest_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'adlspermstest'"
+		},
 		"Aircraft_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": ""
@@ -96,6 +100,22 @@
 			"type": "string",
 			"defaultValue": "https://transtats.bts.gov/"
 		},
+		"adlspermstest_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2demo2.dfs.core.windows.net/"
+		},
+		"adlspermstest_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"adlspermstest_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "9fe06a52-6dc4-41a7-aff8-a5ee1eff138d"
+		},
+		"AzureDataLakeStorageFile1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "/ontimedata/test"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -129,11 +149,23 @@
 					"DemoBlobData_connectionString": {
 						"value": "[parameters('DemoBlobData_connectionString')]"
 					},
+					"adlspermstest_servicePrincipalKey": {
+						"value": "[parameters('adlspermstest_servicePrincipalKey')]"
+					},
 					"ADLSGen2_properties_typeProperties_url": {
 						"value": "[parameters('ADLSGen2_properties_typeProperties_url')]"
 					},
 					"BTS_properties_typeProperties_url": {
 						"value": "[parameters('BTS_properties_typeProperties_url')]"
+					},
+					"adlspermstest_properties_typeProperties_url": {
+						"value": "[parameters('adlspermstest_properties_typeProperties_url')]"
+					},
+					"adlspermstest_properties_typeProperties_tenant": {
+						"value": "[parameters('adlspermstest_properties_typeProperties_tenant')]"
+					},
+					"adlspermstest_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('adlspermstest_properties_typeProperties_servicePrincipalId')]"
 					},
 					"Aircraft_properties_typeProperties_fileName": {
 						"value": "[parameters('Aircraft_properties_typeProperties_fileName')]"
@@ -170,9 +202,6 @@
 					},
 					"Manufacturers_properties_typeProperties_folderPath": {
 						"value": "[parameters('Manufacturers_properties_typeProperties_folderPath')]"
-					},
-					"ManufacturersSink_properties_typeProperties_folderPath": {
-						"value": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
 					}
 				}
 			},
@@ -192,6 +221,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ManufacturersSink_properties_typeProperties_folderPath": {
+						"value": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
+					},
 					"Metar_properties_typeProperties_fileName": {
 						"value": "[parameters('Metar_properties_typeProperties_fileName')]"
 					},
@@ -206,6 +238,9 @@
 					},
 					"OnTimeFactsSink_properties_typeProperties_folderPath": {
 						"value": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
+					},
+					"AzureDataLakeStorageFile1_properties_typeProperties_folderPath": {
+						"value": "[parameters('AzureDataLakeStorageFile1_properties_typeProperties_folderPath')]"
 					}
 				}
 			},

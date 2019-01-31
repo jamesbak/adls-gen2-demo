@@ -7,6 +7,10 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "adlsgen2demo2"
 		},
+		"ManufacturersSink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "ontimedata/csv/manufacturers"
+		},
 		"Metar_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": ""
@@ -26,12 +30,33 @@
 		"OnTimeFactsSink_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "ontimedata/csv/OnTimeFacts"
+		},
+		"AzureDataLakeStorageFile1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "/ontimedata/test"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ManufacturersSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"folderPath": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Metar')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -103,6 +128,23 @@
 				"typeProperties": {
 					"fileName": "[parameters('OnTimeFactsSink_properties_typeProperties_fileName')]",
 					"folderPath": "[parameters('OnTimeFactsSink_properties_typeProperties_folderPath')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorageFile1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "adlspermstest",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlobFSFile",
+				"typeProperties": {
+					"folderPath": "[parameters('AzureDataLakeStorageFile1_properties_typeProperties_folderPath')]"
 				}
 			},
 			"dependsOn": []
@@ -490,7 +532,58 @@
 				"[concat(variables('factoryId'), '/datasets/OnTimeFacts')]",
 				"[concat(variables('factoryId'), '/datasets/OnTimeFactsSink')]",
 				"[concat(variables('factoryId'), '/datasets/Metar')]",
-				"[concat(variables('factoryId'), '/datasets/MetarSink')]"
+				"[concat(variables('factoryId'), '/datasets/MetarSink')]",
+				"[concat(variables('factoryId'), '/datasets/ManufacturersSink')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BlobSource",
+								"recursive": true
+							},
+							"sink": {
+								"type": "AzureBlobFSSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Aircraft",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureDataLakeStorageFile1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureDataLakeStorageFile1')]"
 			]
 		}
 	]

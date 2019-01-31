@@ -11,6 +11,9 @@
 		"DemoBlobData_connectionString": {
 			"value": ""
 		},
+		"adlspermstest_servicePrincipalKey": {
+			"value": ""
+		},
 		"Aircraft_properties_typeProperties_fileName": {
 			"value": ""
 		},
@@ -70,6 +73,18 @@
 		},
 		"BTS_properties_typeProperties_url": {
 			"value": "https://transtats.bts.gov/"
+		},
+		"adlspermstest_properties_typeProperties_url": {
+			"value": "https://adlsgen2demo2.dfs.core.windows.net/"
+		},
+		"adlspermstest_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"adlspermstest_properties_typeProperties_servicePrincipalId": {
+			"value": "9fe06a52-6dc4-41a7-aff8-a5ee1eff138d"
+		},
+		"AzureDataLakeStorageFile1_properties_typeProperties_folderPath": {
+			"value": "/ontimedata/test"
 		}
 	}
 }

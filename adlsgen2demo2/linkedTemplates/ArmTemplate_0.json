@@ -16,6 +16,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DemoBlobData'"
 		},
+		"adlspermstest_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'adlspermstest'"
+		},
 		"ADLSGen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsgen2demo2.dfs.core.windows.net"
@@ -23,6 +27,18 @@
 		"BTS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://transtats.bts.gov/"
+		},
+		"adlspermstest_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2demo2.dfs.core.windows.net/"
+		},
+		"adlspermstest_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"adlspermstest_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "9fe06a52-6dc4-41a7-aff8-a5ee1eff138d"
 		},
 		"Aircraft_properties_typeProperties_fileName": {
 			"type": "string",
@@ -71,10 +87,6 @@
 		"Manufacturers_properties_typeProperties_folderPath": {
 			"type": "string",
 			"defaultValue": "demo-data/manufacturers"
-		},
-		"ManufacturersSink_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "ontimedata/csv/manufacturers"
 		}
 	},
 	"variables": {
@@ -131,6 +143,25 @@
 				"typeProperties": {
 					"computeProperties": {
 						"location": "West US 2"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adlspermstest')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('adlspermstest_properties_typeProperties_url')]",
+					"tenant": "[parameters('adlspermstest_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('adlspermstest_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('adlspermstest_servicePrincipalKey')]"
 					}
 				}
 			},
@@ -576,25 +607,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/DemoBlobData')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ManufacturersSink')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureBlobFSFile",
-				"typeProperties": {
-					"folderPath": "[parameters('ManufacturersSink_properties_typeProperties_folderPath')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
 			]
 		}
 	]
