@@ -1,0 +1,13 @@
+{
+	"name": "AzureDataLakeStorageFile1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adlspermstest",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"folderPath": "/ontimedata/test"
+		}
+	}
+}
